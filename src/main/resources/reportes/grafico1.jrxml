@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.18.1.final using JasperReports Library version 6.18.1-9d75d1969e774d4f179fb3be8401e98a0e6d1611  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="grafico1" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="e03c76a2-a015-401f-a1e5-d70155a658a6">
+	<property name="com.jaspersoft.studio.data.sql.tables">
+		<![CDATA[dGJfcHJvZHVjdG9zIEFTICwxNSwxNSxiMTEzNDg5ZC0yMzMyLTRjZDUtYmVjYi05Mjk0ZjYzNDBl
+N2Y7dGJfY2F0ZWdvcmlhcyBBUyAsMTUwLDE1LDYwMDkzZWRjLTQ1Y2UtNDRkNy05MDA1LTAxNjA1
+NWZkNmU0Nzs=]]>
+	</property>
+	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w1" value="338"/>
+	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w2" value="650"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Conexion-T5BB-Ciberfarma"/>
+	<queryString language="SQL">
+		<![CDATA[select c.descripcion as categoria, 
+	   count(*) as productos, 
+       sum(stk_prod) as total_art,
+       max(stk_prod) as mayor_stock,
+       min(stk_prod) as menor_stock
+from tb_productos as p 
+inner join tb_categorias as c
+on p.idcategoria = c.idcategoria
+group by c.idcategoria]]>
+	</queryString>
+	<field name="categoria" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="descripcion"/>
+		<property name="com.jaspersoft.studio.field.label" value="categoria"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="tb_categorias"/>
+	</field>
+	<field name="productos" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="productos"/>
+		<property name="com.jaspersoft.studio.field.label" value="productos"/>
+	</field>
+	<field name="total_art" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="total_art"/>
+		<property name="com.jaspersoft.studio.field.label" value="total_art"/>
+	</field>
+	<field name="mayor_stock" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="mayor_stock"/>
+		<property name="com.jaspersoft.studio.field.label" value="mayor_stock"/>
+	</field>
+	<field name="menor_stock" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="menor_stock"/>
+		<property name="com.jaspersoft.studio.field.label" value="menor_stock"/>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="540" splitType="Stretch">
+			<pieChart>
+				<chart evaluationTime="Report">
+					<reportElement x="0" y="50" width="380" height="290" uuid="6f6b005b-e738-4484-be8a-38dc8e0795cf"/>
+					<chartTitle/>
+					<chartSubtitle/>
+					<chartLegend/>
+				</chart>
+				<pieDataset>
+					<dataset resetType="Report"/>
+					<keyExpression><![CDATA[$F{categoria}]]></keyExpression>
+					<valueExpression><![CDATA[$F{productos}]]></valueExpression>
+					<labelExpression><![CDATA[$F{productos}.toString()]]></labelExpression>
+				</pieDataset>
+				<piePlot>
+					<plot/>
+					<itemLabel/>
+				</piePlot>
+			</pieChart>
+			<staticText>
+				<reportElement x="0" y="10" width="380" height="30" uuid="7ef91a36-4c89-4bbd-984f-9fd369217ac8"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[Cantidades de Productos por Categoría]]></text>
+			</staticText>
+			<lineChart>
+				<chart evaluationTime="Report">
+					<reportElement x="390" y="51" width="401" height="291" uuid="9c60ba1f-8750-4659-b7b4-0bcb3ba33dba"/>
+					<chartTitle/>
+					<chartSubtitle/>
+					<chartLegend/>
+				</chart>
+				<categoryDataset>
+					<dataset resetType="Report"/>
+					<categorySeries>
+						<seriesExpression><![CDATA["Mayor Stock"]]></seriesExpression>
+						<categoryExpression><![CDATA[$F{categoria}]]></categoryExpression>
+						<valueExpression><![CDATA[$F{mayor_stock}]]></valueExpression>
+					</categorySeries>
+					<categorySeries>
+						<seriesExpression><![CDATA["Menor Stock"]]></seriesExpression>
+						<categoryExpression><![CDATA[$F{categoria}]]></categoryExpression>
+						<valueExpression><![CDATA[$F{menor_stock}]]></valueExpression>
+					</categorySeries>
+				</categoryDataset>
+				<linePlot>
+					<plot/>
+					<categoryAxisFormat>
+						<axisFormat labelColor="#000000" tickLabelColor="#000000" axisLineColor="#000000"/>
+					</categoryAxisFormat>
+					<valueAxisFormat>
+						<axisFormat labelColor="#000000" tickLabelColor="#000000" axisLineColor="#000000"/>
+					</valueAxisFormat>
+				</linePlot>
+			</lineChart>
+		</band>
+	</summary>
+</jasperReport>

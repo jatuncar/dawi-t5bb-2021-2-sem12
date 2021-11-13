@@ -1,0 +1,43 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<!-- JSTL / CustomTag   -->
+
+<head>
+	<title>Getting Started: Serving Web Content</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+</head>
+
+<body>
+	<div style="margin-left: 20%; width: 60%;">
+		<h2>Acceso al sistema</h2>
+		<form action="/user/validar" method="post" th:object="${usuario}">
+
+			<div class="form-group">
+				<label for="inputAddress">Usuario</label>
+				<input th:field="*{correo}"  type="email" 
+					class="form-control" id="inputAddress" 
+					placeholder="Ingrese usuario (correo)">
+			</div>
+			<div class="form-group">
+				<label for="inputAddress2">Contraseña</label>
+				<input th:field="*{clave}" type="password" 
+					class="form-control" id="inputAddress2" 
+					placeholder="Ingrese contraseña">
+			</div>
+
+			<button type="submit" class="btn btn-primary">Ingresar</button>
+			<a href="#" class="btn btn-primary">registrar</a>
+		</form>
+	</div>
+</body>
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<!-- Popper JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</html>
